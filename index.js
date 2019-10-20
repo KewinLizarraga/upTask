@@ -1,15 +1,18 @@
 const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+
+const routes = require('./routes');
 
 const app = express();
 
-const routes = require('./routes');
-// app.use('/', (req, res) => {
-//     res.send('Hola')
-// })
+app.use(express.static('public'));
 
-// app.use('/nosotros', (req, res) => {
-//     res.send('Hola')
-// })
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(routes);
 
