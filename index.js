@@ -3,6 +3,12 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 const routes = require('./routes');
+const db = require('./config/db');
+require('./models/Proyectos');
+
+db.sync()
+    .then(() => console.log('La conexión se ha establecido con éxito.'))
+    .catch(err => console.log('No se puede conectar a la base de datos', err));
 
 const app = express();
 

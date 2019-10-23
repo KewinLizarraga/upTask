@@ -1,3 +1,6 @@
+const Proyectos = require('../models/Proyectos');
+const slug = require('slug');
+
 module.exports = {
     proyectosHome: (req, res) => {
         res.render('index', {
@@ -9,12 +12,12 @@ module.exports = {
             nombrePagina: 'Nuevo Proyecto'
         });
     },
-    nuevoProyecto: (req, res) => {
+    nuevoProyecto: async (req, res) => {
         const { nombre } = req.body;
         let errores = [];
 
         if (!nombre) {
-            errores.push({'texto':'Agrega un nombre al proyecto'});
+            errores.push({ 'texto': 'Agrega un nombre al proyecto' });
         }
         if (errores.length > 0) {
             res.render('nuevoProyecto', {
@@ -22,8 +25,8 @@ module.exports = {
                 errores
             });
         } else {
-            // No hay errores
-            // Insertar en la DB
+            const data = await Proyectos.create({ nombre });
+            res.redirect('/');
         }
     }
 }
