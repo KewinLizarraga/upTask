@@ -10,5 +10,6 @@ router.get('/nuevo-proyecto', proyectosController.formularioProyecto);
 router.post('/nuevo-proyecto',
             body('nombre').not().isEmpty().trim().escape(),
             proyectosController.nuevoProyecto);
+router.get('/proyectos/:url', proyectosController.proyectosPorUrl);
 
 module.exports = router;
