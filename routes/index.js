@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
 const { body } = require('express-validator/check');
-
 const proyectosController = require('../controllers/proyectosController');
 
 router.get('/', proyectosController.proyectosHome);
@@ -11,5 +9,9 @@ router.post('/nuevo-proyecto',
             body('nombre').not().isEmpty().trim().escape(),
             proyectosController.nuevoProyecto);
 router.get('/proyectos/:url', proyectosController.proyectosPorUrl);
+router.get('/proyecto/editar/:id', proyectosController.formularioEditar);
+router.post('/nuevo-proyecto/:id',
+            body('nombre').not().isEmpty().trim().escape(),
+            proyectosController.actualizarProyecto);
 
 module.exports = router;
