@@ -20,9 +20,8 @@ module.exports = {
         const { nombre } = req.body;
         let errores = [];
 
-        if (!nombre) {
-            errores.push({ 'texto': 'Agrega un nombre al proyecto' });
-        }
+        if (!nombre) errores.push({ 'texto': 'Agrega un nombre al proyecto' });
+
         if (errores.length > 0) {
             res.render('nuevoProyecto', {
                 nombrePagina: 'Nuevo Proyecto',
@@ -36,11 +35,7 @@ module.exports = {
     },
     proyectosPorUrl: async (req, res, next) => {
         const proyectosPromise = Proyectos.findAll();
-        const proyectoPromise = Proyectos.findOne({
-            where: {
-                url: req.params.url
-            }
-        });
+        const proyectoPromise = Proyectos.findOne({where: {url: req.params.url}});
         const [proyectos, proyecto] = await Promise.all([proyectosPromise, proyectoPromise]);
 
         if (!proyecto) return next();
@@ -53,14 +48,10 @@ module.exports = {
     },
     formularioEditar: async (req, res, next) => {
         const proyectosPromise = Proyectos.findAll();
-        const proyectoPromise = Proyectos.findOne({
-            where: {
-                id: req.params.id
-            }
-        });
+        const proyectoPromise = Proyectos.findOne({where: {id: req.params.id}});
         const [proyectos, proyecto] = await Promise.all([proyectosPromise, proyectoPromise]);
 
-        // if (!proyecto) return next();
+        if (!proyecto) return next();
 
         res.render('nuevoProyecto', {
             nombrePagina: 'Editar Proyecto',
@@ -73,9 +64,8 @@ module.exports = {
         const { nombre } = req.body;
         let errores = [];
 
-        if (!nombre) {
-            errores.push({ 'texto': 'Agrega un nombre al proyecto' });
-        }
+        if (!nombre) errores.push({ 'texto': 'Agrega un nombre al proyecto' });
+        
         if (errores.length > 0) {
             res.render('nuevoProyecto', {
                 nombrePagina: 'Nuevo Proyecto',
@@ -89,5 +79,13 @@ module.exports = {
             );
             res.redirect('/');
         }
+    },
+    eliminarProyecto: async (req, res, next) => {
+        const { urlProyecto } = req.query;
+        const resultado = await Proyectos.destroy({ where: { url: urlProyecto } })
+
+        if (!resultado) return next();
+
+        res.status(200).send('Proyecto eliminado correctamente.');
     }
 }
