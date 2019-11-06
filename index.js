@@ -6,6 +6,7 @@ const routes = require('./routes');
 const helpers = require('./helpers');
 const db = require('./config/db');
 require('./models/Proyectos');
+require('./models/Tareas');
 
 db.sync()
     .then(() => console.log('La conexión se ha establecido con éxito.'))
@@ -29,6 +30,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(routes);
 
-const PORT = 3000;
+const PORT = 3002;
 
 app.listen(PORT, () => console.log(`API run in: ${PORT}`));
