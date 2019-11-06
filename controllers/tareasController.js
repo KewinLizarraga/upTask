@@ -15,5 +15,8 @@ module.exports = {
         if (!resultado) return next();
 
         res.redirect(`/proyectos/${req.params.url}`);
+    },
+    listarTareas: (req, res) => {
+        
     }
 }
