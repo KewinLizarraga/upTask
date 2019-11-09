@@ -6,6 +6,13 @@ module.exports = {
             nombrePagina: 'Crear cuenta'
         })
     },
+    formIniciarSesion: (req, res) => {
+        const { error } = res.locals.mensajes;
+        res.render('iniciarSesion', {
+            nombrePagina: 'Iniciar sesión',
+            error
+        })
+    },
     crearCuenta: async (req, res) => {
         const { email, password } = req.body;
 

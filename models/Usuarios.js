@@ -25,7 +25,7 @@ const Usuarios = db.define('usuarios', {
         type: Sequelize.STRING(60),
         allowNull: false,
         validate: {
-            notEmpty: { msg: 'El password no puede ir vacio.' }
+            notEmpty: { msg: 'El password no puede ir vacio' }
         }
     }
 }, {
@@ -36,6 +36,11 @@ const Usuarios = db.define('usuarios', {
     }
 });
 
-Usuarios.hasMany(Proyectos);
+// Métodos personalizados
+Usuarios.prototype.verificarPassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+}
+
+// Usuarios.hasMany(Proyectos);
 
 module.exports = Usuarios;

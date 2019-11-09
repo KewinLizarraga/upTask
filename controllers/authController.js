@@ -10,5 +10,10 @@ module.exports = {
     usuarioAutenticado: (req, res, next) => {
         if (req.isAuthenticated()) return next();
         return res.redirect('/iniciar-sesion');
+    },
+    cerrarSesion: (req, res) =>{
+        req.session.destroy(()=>{
+            res.redirect('/iniciar-sesion');
+        });
     }
 }
