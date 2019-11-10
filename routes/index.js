@@ -23,5 +23,9 @@ router.post('/crear-cuenta', usuariosController.crearCuenta);
 router.get('/iniciar-sesion', usuariosController.formIniciarSesion);
 router.post('/iniciar-sesion', authController.autenticarUsuario);
 router.get('/cerrar-sesion', authController.cerrarSesion);
+router.get('/reestablecer', usuariosController.formReestablecerPassword);
+router.post('/reestablecer', authController.enviarToken);
+router.get('/reestablecer/:token', authController.validarToken);
+router.post('/reestablecer/:token', authController.actualizarPassword);
 
 module.exports = router;

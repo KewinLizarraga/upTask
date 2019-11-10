@@ -48,6 +48,6 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
-const PORT = 3005;
+const PORT = 3006;
 
 app.listen(PORT, () => console.log(`API run in: ${PORT}`));

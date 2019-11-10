@@ -27,8 +27,11 @@ module.exports = {
                 email,
                 password
             });
-
         }
-
+    },
+    formReestablecerPassword: (req,res)=>{
+        res.render('reestablecer', {
+            nombrePagina: 'Reestablecer tu contraseña'
+        });
     }
 }
