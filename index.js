@@ -42,12 +42,12 @@ app.use(passport.session());
 app.use((req, res, next) => {
     res.locals.vardump = helpers.vardump;
     res.locals.mensajes = req.flash();
-    res.locals.usuario = { ...req.user } || null;    
+    res.locals.usuario = { ...req.user } || null;
     next();
 });
 
-app.use(routes);
+app.use('/', routes);
 
-const PORT = 3006;
+const PORT = 3000;
 
 app.listen(PORT, () => console.log(`API run in: ${PORT}`));
