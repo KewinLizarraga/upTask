@@ -28,7 +28,7 @@ exports.enviar = async (opciones) => {
         to: opciones.usuario.email,
         subject: opciones.subject,
         text,
-        html 
+        html
     };
 
     const enviarEmail = util.promisify(transport.sendMail, transport);

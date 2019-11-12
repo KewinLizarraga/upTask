@@ -6,7 +6,7 @@ const Usuarios = require('../models/Usuarios');
 passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'password' },
     async (email, password, done) => {
         try {
-            const usuario = await Usuarios.findOne({ where: { email: email } })
+            const usuario = await Usuarios.findOne({ where: { email, activo: 1 } })
             // Usuario existe, password incorrecto
             if (!usuario.verificarPassword(password)) {
                 return done(null, false, {

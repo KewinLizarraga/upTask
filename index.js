@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-// const expressValidator = require('express-validator');
+const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -23,12 +23,9 @@ const app = express();
 app.use(express.static('public'));
 app.set('view engine', 'pug');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(expressValidator());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 app.set('views', path.join(__dirname, './views'));
-// Flash messages
-app.use(flash());
-
 app.use(cookieParser());
 // Sessions
 app.use(session({
@@ -38,6 +35,8 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+// Flash messages
+app.use(flash());
 // Pasar var_dump a la app
 app.use((req, res, next) => {
     res.locals.vardump = helpers.vardump;
@@ -48,6 +47,6 @@ app.use((req, res, next) => {
 
 app.use('/', routes);
 
-const PORT = 3000;
+const PORT = 3002;
 
 app.listen(PORT, () => console.log(`API run in: ${PORT}`));

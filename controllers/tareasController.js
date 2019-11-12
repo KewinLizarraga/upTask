@@ -32,8 +32,8 @@ module.exports = {
         res.status(200).send('Actualizado')
     },
     eliminarTarea: async (req, res, next) => {
-        const {id }= req.params;
-        const resultado = await Tareas.destroy({where:{id}});
+        const { id } = req.params;
+        const resultado = await Tareas.destroy({ where: { id } });
 
         if (!resultado) return next();
 

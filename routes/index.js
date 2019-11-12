@@ -20,6 +20,7 @@ router.delete('/tareas/:id', authController.usuarioAutenticado, tareasController
 
 router.get('/crear-cuenta', usuariosController.formCrearCuenta);
 router.post('/crear-cuenta', usuariosController.crearCuenta);
+router.get('/confirmar/:correo', usuariosController.confirmarCuenta)
 router.get('/iniciar-sesion', usuariosController.formIniciarSesion);
 router.post('/iniciar-sesion', authController.autenticarUsuario);
 router.get('/cerrar-sesion', authController.cerrarSesion);
