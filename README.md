@@ -9,7 +9,7 @@ cd upTask
 ### Como correr el proyecto:
 ```
 npm install
-node index.js
+npm start
 ```
 
 ### Paquetes usados
